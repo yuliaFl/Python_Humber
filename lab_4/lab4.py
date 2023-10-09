@@ -57,6 +57,7 @@ while True:
     if choice == '1' :
         # View all students’ information
         for student in students:
+            print('==============================')
             print(f"Student ID: {student['id']}")
             print(f"Name: {student['name']}")
             print(f"Age: {student['age']}")
@@ -77,6 +78,7 @@ while True:
                 print(f"Completed Courses: {student['completed_courses']}")
                 print(f"Ongoing Courses: {student['ongoing_courses']}")
                 print('==============================')
+                break
     # View all ongoing grades of specific student, ask for id if selected
     elif choice == '3':
         id = input('Enter student id: ')
@@ -84,8 +86,6 @@ while True:
             if student['id'] == id:
                for course, status in student['ongoing_courses'].items():
                     print(f"{course}: {status}")
-            else:
-                print('Student not found.')
     # View all completed grades of specific student, ask for id if selected
     elif choice == '4':
         id = input('Enter student id: ')
@@ -93,8 +93,6 @@ while True:
             if student['id'] == id:
                for course, status in student['completed_courses'].items():
                     print(f"{course}: {status}")
-            else:
-                print('Student not found.')
     # View average completed grades of student, ask for id if selected
     elif choice == '5':
         id = input('Enter student id: ')
@@ -119,8 +117,6 @@ while True:
                 else:
                     print(f"{student['name']} has not completed {name}.")
                     break
-            else:
-                print('Student not found.')
     # After exit the program each operation ask user if they would like to perform another query or
     # Include error handling if user id or course name does not exist
     elif choice == '7':
