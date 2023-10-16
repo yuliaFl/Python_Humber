@@ -78,7 +78,6 @@ while True:
                 print(f"Completed Courses: {student['completed_courses']}")
                 print(f"Ongoing Courses: {student['ongoing_courses']}")
                 print('==============================')
-                break
     # View all ongoing grades of specific student, ask for id if selected
     elif choice == '3':
         id = input('Enter student id: ')
