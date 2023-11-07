@@ -14,23 +14,51 @@ def display_balance(balance):
     print(f'Your current balance is ${balance:.2f}')
 # Entering 2 will allow making a withdrawal
 
+# When making a withdrawal user is presented default options as well as custom
+# Display new balance immediately
+# Ensure user has enough money before withdrawal
+def make_withdraw(balance):
+    print("Choose option to withdraw")
+    # After user selects option (20, 40, 60, 80, 100) or enters custom it will be deducted from balance. 
+    print("1. $20\n2. $40\n3. $60\n4. $80\n5. $100\n6. Custom")
+    choice = input("Select an option for withdrawal: ")
+
+    #options 
+    withdrawal_options = {
+        "1": 20,
+        "2": 40,
+        "3": 60,
+        "4": 80,
+        "5": 100,
+        "6": None  
+    }
+    # if for custom option 
+    if choice in withdrawal_options:
+        if choice == "6":
+            custom_amount = float(input("Enter amount: "))
+            #check if enough funds
+            if custom_amount > balance:
+                print("not enough funds")
+            else:
+                balance = balance - custom_amount
+                print(f"New balance: ${balance:.2f}")
+        else:
+            amount_to_withdraw = withdrawal_options[choice]
+            #check if not enough funds
+            if amount_to_withdraw > balance:
+                print("not enough funds")
+            else:
+                balance = balance - amount_to_withdraw
+                print(f" New balance: ${balance:.2f}")
+    else:
+         print("Invalid option. Select 1-6")
+
 # Entering 3 will allow making a deposit
 # When depositing will directly ask how much user wants to deposit and show updated amount once user enters it
 def make_deposit(balance):
     deposit_amount = float(input("How much would you like to deposit: "))
     balance = balance + deposit_amount
     print(f"New balance: ${balance:.2f}")
-
-# After each operation user is asked if they would like to perform another action
-# When making a withdrawal user is presented default options as well as custom
-# After user selects option (20, 40, 60, 80, 100) or enters custom it will be deducted from balance. 
-# Display new balance immediately
-# Ensure user has enough money before withdrawal
-def make_withdraw(balance):
-    print("Choose option to withdraw")
-    print("1. $20\n2. $40\n3. $60\n4. $80\n5. $100\n6. Custom")
-    choice = input("Select an option for withdrawal: ")
-        
 
 # User has 3 chances to enter the correct pin otherwise program exits
 
@@ -50,6 +78,7 @@ while attempts > 0:
 
             choice = input("Choose one: ")
 
+            #navigation 
             if choice == '1':
                 display_balance(balance)
             elif choice == '2':
@@ -58,22 +87,19 @@ while attempts > 0:
                 make_deposit(balance)
             # Entering 4 will exit the program
             elif choice == '4':
+                attempts=-1
                 break
             else:
                 print("Invalid choice. Try again")
-
+    # After each operation user is asked if they would like to perform another action
             continue_choice = input("Would you like to continue? (y/n): ")
             if continue_choice != 'y':
-                break
-
+                #will exit
+                attempts=-1
+                break 
     else:
         print('Incorrect PIN.')
+        #will exit
         attempts -= 1
-
-    break
-
 if attempts == 0:
     print('You have run out of attempts. Exiting.')
-
-
-    # break loop (should not break out after incorect pin, but need to break out when 'n')
