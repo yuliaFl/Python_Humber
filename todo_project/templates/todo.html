@@ -1,0 +1,19 @@
+<!-- Inherit from layout template -->
+{% extends "layout.html" %}
+
+<!-- Override content block in layout -->
+{% block content %}
+
+<h1>Todo List</h1>
+
+<div>
+    {% for todos in todo %}
+        <div>
+            <h3>ToDo : {{todos.name}}</h3>
+            <br>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
+
