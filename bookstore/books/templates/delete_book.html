@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block content %}
+<main class="delete-book layout">
+  <div class="container">
+    <div class="layout__box">
+      <h1>Delete Book</h1>
+    </div>
+  </div>
+  <div class="layout__body">
+    <h2>Book {{ book.title }} will be deleted </h2>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit">Delete</button>
+    </br>
+    </br>   
+      <a href="{% url 'homepage' %}">Cancel</a>
+    </form>
+  </div>
+</main>
+{% endblock %}
