@@ -11,8 +11,7 @@
   <div class="layout__body">
     <form class="form" action="" method="POST">
       {% csrf_token %}
-
-      <!-- Display form elements generated from AddBookForm -->
+      
       <div class="form__group">
         <label for="id_title">Book Title</label>
         {{ form.title }}

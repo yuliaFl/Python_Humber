@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .models import Book
 from .forms import AddBookForm, EditBookForm
+from django.contrib.auth import logout, login
 
 def homepage(request):
     books = Book.objects.all()
@@ -56,29 +57,26 @@ def registration(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            # Authenticate the user
-            user = authenticate(request, username=user.username, password=form.cleaned_data['password1'])
-            # Login the user
-            login(request, user)
-            return redirect('homepage')
+            form.save()
+            return redirect('login')
+        return render(request, 'registration.html', {'form': form})
     else:
         form = UserCreationForm()
 
     return render(request, 'registration.html', {'form': form})
 
-def login(request):
+def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('homepage')
+            login(request, form.get_user())
+            return redirect('homepage')  
     else:
         form = AuthenticationForm()
+
     return render(request, 'login.html', {'form': form})
 
 @login_required
-def logout(request):
+def logout_view(request):
     logout(request)
-    return redirect('homepage')
+    return redirect('homepage')  

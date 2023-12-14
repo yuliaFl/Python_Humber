@@ -4,14 +4,12 @@ from books.models import Book
 from .serializers import BookSerializer
 
 @api_view(['GET'])
-# Create api to get available routes
 def getRoutes(request):
     routes = [
         'GET /api',
         'GET /api/books',
         'GET /api/books/:id'
     ]
-    # Return dict as DRF response
     return Response(routes)
 
 @api_view(['GET'])
